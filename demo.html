@@ -18,12 +18,12 @@
         function MyStream(props) {
             const [topic, setTopic] = useState("");
             const [msg, setMsg] = useState("");
-            useSubscription(props.topic, (packet) => {
+            const { connected } = useSubscription(props.topic, (packet) => {
                 setTopic(packet.topic);
                 setMsg(packet.text());
             });
 
-            return <div>The most recent message on {topic} is {msg}</div>;
+            return <div>({connected ? "connected" : "disconnected"}) The most recent message on {topic} is {msg}</div>;
         }
 
         function App() {
