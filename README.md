@@ -8,7 +8,7 @@ function MyStream(props) {
 	const [ msg, setMsg ] = useState("");
 	useSubscription(props.topic, (packet) => setMsg(packet.text()));
 
-	return <div>The most recent message on {topic} is {msg}</div>;
+	return <div>The most recent message on {props.topic} is {msg}</div>;
 }
 
 function App() {

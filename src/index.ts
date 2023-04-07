@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 
 import mqtt_client from "u8-mqtt/esm/web/index.js";
 
@@ -26,11 +26,10 @@ export function MqttProvider(props: { url: string; children: any }) {
     };
   }, [props.url]);
 
-  return (
-    <MqttContext.Provider value={{ client }}>
-      {props.children}
-    </MqttContext.Provider>
-  );
+  return React.createElement(MqttContext.Provider, {
+    value: { client },
+    children: props.children,
+  });
 }
 
 export function useSubscription(topic: string, callback: (msg: any) => void) {
