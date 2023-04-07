@@ -24,8 +24,10 @@ export function MqttProvider(props: { url: string; children: any }) {
       setConnected(true);
     }
     async function on_disconnect(client, intentional: boolean) {
-      setConnected(false);
       if (!intentional) {
+        // intentional disconnects set connected to false
+        // during the unmount function
+        setConnected(false);
         return client.on_reconnect();
       }
     }
@@ -39,6 +41,7 @@ export function MqttProvider(props: { url: string; children: any }) {
     });
 
     return () => {
+      setConnected(false);
       my_mqtt.disconnect();
       setClient(null);
     };
