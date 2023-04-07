@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>MQTT Demo</title>
-        <meta name="viewport" content="width=device-width">
-        <script type="module">
-// TODO: make a demo
-        </script>
-    </head>
-    <body>
-        <noscript>This page requires JavaScript</noscript>
-        <main id="app"></main>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>MQTT Demo</title>
+    <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+    <noscript>This page requires JavaScript</noscript>
+    <main id="app"></main>
+    <script type="module">
+        import { MqttProvider, useSubscription } from "./src/index.ts";
+        import React, { useState } from "react";
+        import ReactDOM from "react-dom/client";
+
+        function MyStream(props) {
+            const [topic, setTopic] = useState("");
+            const [msg, setMsg] = useState("");
+            useSubscription(props.topic, (packet) => {
+                setTopic(packet.topic);
+                setMsg(packet.text());
+            });
+
+            return <div>The most recent message on {topic} is {msg}</div>;
+        }
+
+        function App() {
+            return React.createElement(
+                MqttProvider,
+                {
+                    url: "wss://test.mosquitto.org:8081/mqtt",
+                    children: React.createElement(MyStream, { topic: "test" })
+                }
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("app"));
+        root.render(React.createElement(App));
+
+    </script>
+</body>
+
 </html>

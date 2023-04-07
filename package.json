@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/shish/react-mqtt/issues"
   },
-  "source": "src/index.tsx",
+  "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/module.js",
   "types": "dist/types.d.ts",
@@ -26,11 +26,14 @@
     "@parcel/transformer-typescript-types": "^2.8.3",
     "parcel": "^2.8.3",
     "prettier": "^2.7.1",
+    "process": "^0.11.10",
+    "react-dom": "^18.2.0",
     "typescript": "4.7"
   },
   "scripts": {
+    "demo": "parcel serve demo.html",
     "clean": "npx rimraf coverage dist node_modules .parcel-cache",
-    "format": "prettier --write 'src/**/*.tsx'",
+    "format": "prettier --write 'src/**/*.ts'",
     "build": "parcel build",
     "prepare": "npm run format && npm run build",
     "release": "./pre-flight-tests && npm run clean && npm i && ./pre-flight-tests && git tag $npm_package_version && git push && git push --tags && npm publish --tag latest --access public"
