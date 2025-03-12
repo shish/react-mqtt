@@ -1,45 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>MQTT Demo</title>
-    <meta name="viewport" content="width=device-width">
-</head>
+    <meta name="viewport" content="width=device-width" />
+  </head>
 
-<body>
+  <body>
     <noscript>This page requires JavaScript</noscript>
     <main id="app"></main>
     <script type="module">
-        import { MqttProvider, useSubscription } from "./src/index.ts";
-        import React, { useState } from "react";
-        import ReactDOM from "react-dom/client";
+      import { MqttProvider, useSubscription } from "./src/index.ts";
+      import React, { useState } from "react";
+      import ReactDOM from "react-dom/client";
 
-        function MyStream(props) {
-            const [topic, setTopic] = useState("");
-            const [msg, setMsg] = useState("");
-            const { connected } = useSubscription(props.topic, (packet) => {
-                setTopic(packet.topic);
-                setMsg(packet.text());
-            });
+      function MyStream(props) {
+        const [topic, setTopic] = useState("");
+        const [msg, setMsg] = useState("");
+        const { connected } = useSubscription(props.topic, (packet) => {
+          setTopic(packet.topic);
+          setMsg(packet.text());
+        });
 
-            return <div>({connected ? "connected" : "disconnected"}) The most recent message on {topic} is {msg}</div>;
-        }
+        return (
+          <div>
+            ({connected ? "connected" : "disconnected"}) The most recent message
+            on {topic} is {msg}
+          </div>
+        );
+      }
 
-        function App() {
-            return React.createElement(
-                MqttProvider,
-                {
-                    url: "wss://test.mosquitto.org:8081/mqtt",
-                    children: React.createElement(MyStream, { topic: "test" })
-                }
-            );
-        }
+      function App() {
+        return React.createElement(MqttProvider, {
+          url: "wss://test.mosquitto.org:8081/mqtt",
+          children: React.createElement(MyStream, { topic: "test" }),
+        });
+      }
 
-        const root = ReactDOM.createRoot(document.getElementById("app"));
-        root.render(React.createElement(App));
-
+      const root = ReactDOM.createRoot(document.getElementById("app"));
+      root.render(React.createElement(App));
     </script>
-</body>
-
+  </body>
 </html>

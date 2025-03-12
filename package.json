@@ -33,7 +33,7 @@
   "scripts": {
     "demo": "parcel serve demo.html",
     "clean": "npx rimraf coverage dist node_modules .parcel-cache",
-    "format": "prettier --write 'src/**/*.ts'",
+    "format": "prettier --write .",
     "build": "parcel build",
     "prepare": "npm run format && npm run build",
     "release": "./pre-flight-tests && npm run clean && npm i && ./pre-flight-tests && git tag $npm_package_version && git push && git push --tags && npm publish --tag latest --access public"
