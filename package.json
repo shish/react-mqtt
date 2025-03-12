@@ -1,6 +1,6 @@
 {
   "name": "@shish2k/react-mqtt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Connect to an MQTT server",
   "keywords": [
     "react",
