@@ -1,6 +1,12 @@
-import React, { createContext, useEffect, useState, useContext } from "react";
+import {
+  createElement,
+  createContext,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 
-import mqtt_client from "u8-mqtt/esm/web/index.js";
+import mqtt_client from "u8-mqtt";
 
 export type MqttContextType = {
   client: any;
@@ -17,13 +23,13 @@ export function MqttProvider(props: { url: string; children: any }) {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    async function on_live(client, is_reconnect: boolean) {
+    async function on_live(client: any, is_reconnect: boolean) {
       if (is_reconnect) {
         client.connect();
       }
       setConnected(true);
     }
-    async function on_disconnect(client, intentional: boolean) {
+    async function on_disconnect(client: any, intentional: boolean) {
       if (!intentional) {
         // intentional disconnects set connected to false
         // during the unmount function
@@ -47,7 +53,7 @@ export function MqttProvider(props: { url: string; children: any }) {
     };
   }, [props.url]);
 
-  return React.createElement(MqttContext.Provider, {
+  return createElement(MqttContext.Provider, {
     value: { client, connected },
     children: props.children,
   });
