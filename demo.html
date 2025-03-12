@@ -31,14 +31,15 @@
       }
 
       function App() {
-        return React.createElement(MqttProvider, {
-          url: "wss://test.mosquitto.org:8081/mqtt",
-          children: React.createElement(MyStream, { topic: "test" }),
-        });
+        return (
+          <MqttProvider url="wss://test.mosquitto.org:8081/mqtt">
+            <MyStream topic="test" />
+          </MqttProvider>
+        );
       }
 
       const root = ReactDOM.createRoot(document.getElementById("app"));
-      root.render(React.createElement(App));
+      root.render(<App />);
     </script>
   </body>
 </html>
