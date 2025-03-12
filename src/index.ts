@@ -6,7 +6,8 @@ import {
   useContext,
 } from "react";
 
-import mqtt_client from "u8-mqtt";
+import mqtt_client from "u8-mqtt/esm/web/index.js";
+
 
 export type MqttContextType = {
   client: any;
