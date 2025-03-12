@@ -8,7 +8,6 @@ import {
 
 import mqtt_client from "u8-mqtt/esm/web/index.js";
 
-
 export type MqttContextType = {
   client: any;
   connected: boolean;
