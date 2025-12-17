@@ -27,6 +27,7 @@
     "@babel/preset-env": "^7.20.2",
     "@parcel/packager-ts": "^2.13.0",
     "@parcel/transformer-typescript-types": "^2.13.0",
+    "@types/react": "^19.0.0",
     "parcel": "^2.13.0",
     "prettier": "^3.6",
     "prettier-plugin-organize-imports": "^4.3.0",
