@@ -1,10 +1,11 @@
 {
   "name": "@shish2k/react-mqtt",
-  "version": "0.0.5",
+  "version": "0.1.0",
+  "type": "module",
   "description": "Connect to an MQTT server",
   "keywords": [
     "react",
-    "time"
+    "mqtt"
   ],
   "author": "Shish <shish+npm@shishnet.org>",
   "license": "MIT",
@@ -13,46 +14,50 @@
   "bugs": {
     "url": "https://github.com/shish/react-mqtt/issues"
   },
-  "source": "src/index.ts",
-  "main": "dist/index.js",
-  "module": "dist/module.js",
-  "types": "dist/types.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "u8-mqtt": "^0.3.1"
+    "u8-mqtt": "^0.6.7"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.20.2",
-    "@parcel/packager-ts": "^2.13.0",
-    "@parcel/transformer-typescript-types": "^2.13.0",
-    "@types/react": "^19.0.0",
-    "parcel": "^2.13.0",
-    "prettier": "^3.6",
-    "prettier-plugin-organize-imports": "^4.3.0",
-    "process": "^0.11.10",
-    "react-dom": "^18.2.0 || ^19.0.0",
-    "typescript": "^5.9.2"
+    "@biomejs/biome": "^2.0",
+    "@testing-library/react": "^16.0",
+    "@types/react": "^19.0",
+    "@vitejs/plugin-react": "^6.0",
+    "happy-dom": "^20.8",
+    "react": "^19.0",
+    "react-dom": "^19.0",
+    "tsdown": "^0.21",
+    "typescript": "^6.0",
+    "vite": "^8.0",
+    "vitest": "^4.0"
   },
   "scripts": {
-    "demo": "parcel serve demo.html",
-    "clean": "npx rimraf coverage dist node_modules .parcel-cache",
-    "format": "prettier --write .",
-    "build": "parcel build",
-    "prepare": "npm run format && npm run build",
-    "release": "./pre-flight-tests && npm run clean && npm i && ./pre-flight-tests && git tag $npm_package_version && git push && git push --tags && npm publish --tag latest --access public"
+    "demo": "vite",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "check": "biome check --write .",
+    "build": "tsdown",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check-git-clean": "test $(git rev-parse --abbrev-ref HEAD) = main || (echo 'please checkout the main branch to make a release!' >&2 && exit 1) && test -z \"$(git status --porcelain)\" || (echo 'please commit your changes before making a release!' >&2 && exit 1)",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run check && npm run test",
+    "release": "npm run check-git-clean && git tag $npm_package_version && git push && git push --tags && npm publish --tag latest --access public"
   },
-  "prettier": {
-    "semi": true,
-    "trailingComma": "all",
-    "plugins": [
-      "prettier-plugin-organize-imports"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ]
+  "tsdown": {
+    "platform": "browser"
   }
 }
