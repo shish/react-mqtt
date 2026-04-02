@@ -9,7 +9,10 @@
   ],
   "author": "Shish <shish+npm@shishnet.org>",
   "license": "MIT",
-  "repository": "shish/react-mqtt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shish/react-mqtt.git"
+  },
   "homepage": "https://github.com/shish/react-mqtt",
   "bugs": {
     "url": "https://github.com/shish/react-mqtt/issues"
