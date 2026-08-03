@@ -9,29 +9,13 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Format
-        run: npx biome format --check .
-
-      - name: Lint
-        run: npx biome lint .
-
-      - name: Check
-        run: npx biome check .
-
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm test
+      - run: npm ci
+      - run: npx biome ci
+      - run: npm run build
+      - run: npm test
