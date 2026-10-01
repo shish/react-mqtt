@@ -45,7 +45,7 @@
     "tsdown": "^0.22",
     "typescript": "^7.0",
     "vite": "^8.0",
-    "vitest": "^4.0"
+    "vitest": "^5.0"
   },
   "scripts": {
     "demo": "vite",
