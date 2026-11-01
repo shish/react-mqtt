@@ -39,7 +39,7 @@
     "@testing-library/react": "^16.0",
     "@types/react": "^19.0",
     "@vitejs/plugin-react": "^6.0",
-    "happy-dom": "^20.8",
+    "happy-dom": "^21.0",
     "react": "^19.0",
     "react-dom": "^19.0",
     "tsdown": "^0.23",
