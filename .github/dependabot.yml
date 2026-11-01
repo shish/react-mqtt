@@ -1,22 +1,22 @@
 version: 2
 updates:
-- package-ecosystem: github-actions
-  assignees:
-    - shish
-  directory: /
-  schedule:
-    interval: monthly
-- package-ecosystem: npm
-  assignees:
-    - shish
-  directory: /
-  schedule:
-    interval: monthly
-  groups:
-    minor-bumps:
-      applies-to: version-updates
-      patterns:
-      - '*'
-      update-types:
-      - minor
-      - patch
+  - package-ecosystem: github-actions
+    assignees:
+      - shish
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: npm
+    assignees:
+      - shish
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      minor-bumps:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
